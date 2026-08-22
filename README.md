@@ -103,7 +103,8 @@ npm run preview
 
 ---
 
-## Documentation & Retrospective
+## Documentation & Retrospectives
 
-For a detailed analysis of the trade-offs, language constraints, and developer experience using Glyph in this project, see:
+For detailed technical evaluations, trade-off analyses, and architecture comparisons, see:
 - [Glyph Evaluation & Engineering Retrospective](docs/glyph-retrospective.md)
+- [Comparative Analysis: Glyph vs. Pure TypeScript](docs/glyph-vs-pure-typescript.md)
