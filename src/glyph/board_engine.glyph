@@ -1,0 +1,55 @@
+module board_engine
+
+fn get_next_status(current_status: string) -> string {
+  return match current_status {
+    "Backlog" => "Todo",
+    "Todo" => "InProgress",
+    "InProgress" => "InReview",
+    "InReview" => "Done",
+    "Done" => "Done",
+    else => "Backlog",
+  }
+}
+
+fn get_previous_status(current_status: string) -> string {
+  return match current_status {
+    "Done" => "InReview",
+    "InReview" => "InProgress",
+    "InProgress" => "Todo",
+    "Todo" => "Backlog",
+    "Backlog" => "Backlog",
+    else => "Backlog",
+  }
+}
+
+fn get_status_color(status: string) -> string {
+  return match status {
+    "Backlog" => "slate",
+    "Todo" => "sky",
+    "InProgress" => "amber",
+    "InReview" => "purple",
+    "Done" => "emerald",
+    else => "slate",
+  }
+}
+
+fn get_priority_weight(priority: string) -> number {
+  return match priority {
+    "Urgent" => 4,
+    "High" => 3,
+    "Medium" => 2,
+    "Low" => 1,
+    else => 0,
+  }
+}
+
+fn format_activity_message(user_name: string, action: string, card_title: string, detail: string) -> string {
+  return match action {
+    "create" => "${user_name} created card \"${card_title}\"",
+    "move" => "${user_name} moved card \"${card_title}\": ${detail}",
+    "edit" => "${user_name} updated card \"${card_title}\"",
+    "delete" => "${user_name} deleted card \"${card_title}\"",
+    "reassign" => "${user_name} reassigned \"${card_title}\": ${detail}",
+    else => "${user_name} performed ${action} on \"${card_title}\"",
+  }
+}

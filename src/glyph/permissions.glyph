@@ -1,0 +1,86 @@
+module permissions
+
+fn is_admin(role: string) -> bool {
+  return match role {
+    "Admin" => true,
+    else => false,
+  }
+}
+
+fn is_reporter(role: string) -> bool {
+  return match role {
+    "Reporter" => true,
+    else => false,
+  }
+}
+
+fn is_assignee(role: string) -> bool {
+  return match role {
+    "Assignee" => true,
+    else => false,
+  }
+}
+
+fn can_view_admin_metrics(role: string) -> bool {
+  return match role {
+    "Admin" => true,
+    else => false,
+  }
+}
+
+fn can_create_card(role: string) -> bool {
+  return match role {
+    "Admin" => true,
+    "Reporter" => true,
+    else => false,
+  }
+}
+
+fn can_edit_card(role: string, card_reporter_id: string, card_assignee_id: string, current_user_id: string) -> bool {
+  return match role {
+    "Admin" => true,
+    "Reporter" => match card_reporter_id == current_user_id {
+      true => true,
+      false => false,
+    },
+    "Assignee" => match card_assignee_id == current_user_id {
+      true => true,
+      false => false,
+    },
+    else => false,
+  }
+}
+
+fn can_delete_card(role: string, card_reporter_id: string, current_user_id: string) -> bool {
+  return match role {
+    "Admin" => true,
+    "Reporter" => match card_reporter_id == current_user_id {
+      true => true,
+      false => false,
+    },
+    else => false,
+  }
+}
+
+fn can_move_card_status(role: string, card_reporter_id: string, card_assignee_id: string, current_user_id: string) -> bool {
+  return match role {
+    "Admin" => true,
+    "Assignee" => match card_assignee_id == current_user_id {
+      true => true,
+      false => false,
+    },
+    "Reporter" => match card_reporter_id == current_user_id {
+      true => true,
+      false => false,
+    },
+    else => false,
+  }
+}
+
+fn can_reassign_card(role: string) -> bool {
+  return match role {
+    "Admin" => true,
+    "Reporter" => true,
+    else => false,
+  }
+}

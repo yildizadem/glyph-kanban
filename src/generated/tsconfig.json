@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "types": [],
+    "paths": { "std/*": ["./.glyph-runtime/std/*"] }
+  },
+  "include": [
+    "**/*.ts",
+    ".glyph-runtime/**/*.ts",
+    ".glyph-runtime/**/*.d.ts",
+    ".types/**/*.d.ts"
+  ]
+}

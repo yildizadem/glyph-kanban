@@ -1,0 +1,83 @@
+module models
+
+type Role =
+  | Admin
+  | Reporter
+  | Assignee
+
+type Priority =
+  | Low
+  | Medium
+  | High
+  | Urgent
+
+type Status =
+  | Backlog
+  | Todo
+  | InProgress
+  | InReview
+  | Done
+
+type User = {
+  id: string,
+  name: string,
+  email: string,
+  role: string,
+  avatarUrl: string,
+}
+
+type TaskCard = {
+  id: string,
+  title: string,
+  description: string,
+  status: string,
+  priority: string,
+  reporterId: string,
+  assigneeId: string,
+  createdAt: string,
+  updatedAt: string,
+  startedAt: string,
+  completedAt: string,
+  dueDate: string,
+  estimatedHours: number,
+  spentHours: number,
+  tags: Array<string>,
+}
+
+type ActivityLog = {
+  id: string,
+  cardId: string,
+  userId: string,
+  action: string,
+  fromStatus: string,
+  toStatus: string,
+  timestamp: string,
+  details: string,
+}
+
+type AssigneeMetric = {
+  assigneeId: string,
+  assignedCount: number,
+  completedCount: number,
+  inProgressCount: number,
+  totalEstimatedHours: number,
+  totalSpentHours: number,
+  completionRate: number,
+}
+
+type SummaryMetrics = {
+  totalCards: number,
+  backlogCards: number,
+  todoCards: number,
+  inProgressCards: number,
+  inReviewCards: number,
+  completedCards: number,
+  completionRate: number,
+  avgCycleTimeHours: number,
+  avgLeadTimeHours: number,
+  totalEstimatedHours: number,
+  totalSpentHours: number,
+  overdueCount: number,
+  bottleneckStatus: string,
+  healthScore: number,
+}

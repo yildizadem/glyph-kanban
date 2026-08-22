@@ -1,0 +1,68 @@
+module analytics
+
+fn calculate_completion_rate(total: number, completed: number) -> number {
+  return match total > 0 {
+    true => (completed / total) * 100,
+    false => 0,
+  }
+}
+
+fn calculate_cycle_time_hours(started_at_ms: number, completed_at_ms: number) -> number {
+  return match started_at_ms > 0 && completed_at_ms >= started_at_ms {
+    true => {
+      let diff_ms = completed_at_ms - started_at_ms
+      let hours = diff_ms / 3600000
+      return hours
+    },
+    false => 0,
+  }
+}
+
+fn calculate_lead_time_hours(created_at_ms: number, completed_at_ms: number) -> number {
+  return match created_at_ms > 0 && completed_at_ms >= created_at_ms {
+    true => {
+      let diff_ms = completed_at_ms - created_at_ms
+      let hours = diff_ms / 3600000
+      return hours
+    },
+    false => 0,
+  }
+}
+
+fn detect_bottleneck_warning(in_progress_count: number, in_review_count: number, wip_threshold: number) -> string {
+  return match in_progress_count > wip_threshold {
+    true => "High In-Progress WIP: Team may be multitasking or blocked",
+    false => match in_review_count > wip_threshold {
+      true => "Review Bottleneck: Tasks are piling up awaiting review",
+      false => "Healthy Flow: Workload distribution is within optimal limits",
+    },
+  }
+}
+
+fn compute_health_score(completion_rate: number, overdue_count: number, is_bottlenecked: bool) -> number {
+  let base_score = completion_rate
+  let penalty_overdue = overdue_count * 5
+  let penalty_bottleneck = match is_bottlenecked {
+    true => 15,
+    false => 0,
+  }
+  let total_penalty = penalty_overdue + penalty_bottleneck
+  let score = 100 - total_penalty + (base_score * 0.4)
+  return match score < 0 {
+    true => 0,
+    false => match score > 100 {
+      true => 100,
+      false => score,
+    },
+  }
+}
+
+fn is_task_overdue(due_date_ms: number, now_ms: number, is_completed: bool) -> bool {
+  return match is_completed {
+    true => false,
+    false => match due_date_ms > 0 && now_ms > due_date_ms {
+      true => true,
+      false => false,
+    },
+  }
+}
