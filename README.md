@@ -108,3 +108,4 @@ npm run preview
 For detailed technical evaluations, trade-off analyses, and architecture comparisons, see:
 - [Glyph Evaluation & Engineering Retrospective](docs/glyph-retrospective.md)
 - [Comparative Analysis: Glyph vs. Pure TypeScript](docs/glyph-vs-pure-typescript.md)
+- [Ideal Use Cases & Project Fits for Glyph](docs/ideal-glyph-use-cases.md)
