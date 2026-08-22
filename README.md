@@ -100,3 +100,10 @@ npm run preview
 ├── tailwind.config.js
 └── vite.config.ts
 ```
+
+---
+
+## Documentation & Retrospective
+
+For a detailed analysis of the trade-offs, language constraints, and developer experience using Glyph in this project, see:
+- [Glyph Evaluation & Engineering Retrospective](docs/glyph-retrospective.md)
